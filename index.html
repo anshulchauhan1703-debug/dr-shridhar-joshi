@@ -44,7 +44,7 @@ nav ul a:hover{color:var(--teal)}
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end}
 .hero-text{padding-bottom:64px}
 .hero .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-.portrait{aspect-ratio:4/5;border-radius:240px 240px 0 0;background:var(--teal) var(--doctor-img) center top/cover no-repeat;display:grid;place-items:center;color:#fff;font-weight:700;text-align:center;padding:20px}
+.portrait{width:100%;aspect-ratio:4/5;border-radius:240px 240px 0 0;background:var(--teal) var(--doctor-img) center top/cover no-repeat;display:grid;place-items:center;color:#fff;font-weight:700;text-align:center;padding:20px}
 .portrait span{opacity:.9}
 @media(max-width:760px){.hero .wrap{grid-template-columns:1fr}.portrait{max-width:340px;margin:0 auto}}
 /* stats */
@@ -84,14 +84,44 @@ nav ul a:hover{color:var(--teal)}
 @media(max-width:760px){.contact .box{grid-template-columns:1fr;padding:30px}}
 footer{padding:28px 0;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* ===== MOBILE ===== */
+.menu-btn{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font-size:1.4rem;cursor:pointer}
+.mbar{display:none}
+@media(max-width:760px){
+  body{font-size:16px;padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+  section{padding:52px 0}
+  .wrap{padding:0 18px}
+  nav{height:60px;gap:10px;position:relative}
+  .logo{font-size:1.02rem;margin-right:auto}
+  .menu-btn{display:block;order:3}
+  nav ul{display:none;position:absolute;top:60px;left:-18px;right:-18px;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:6px 18px 14px}
+  nav ul.open{display:flex}
+  nav ul a{display:block;padding:14px 4px;font-size:1.05rem;border-bottom:1px solid var(--line)}
+  nav ul li:last-child a{border-bottom:0}
+  .hero{padding-top:40px}
+  .hero-text{padding-bottom:36px}
+  .hero .btns .btn,.contact .btn{display:block;width:100%;text-align:center;margin:0 0 10px}
+  .portrait{max-width:300px;margin:0 auto;border-radius:150px 150px 0 0}
+  .stats .wrap{padding-top:26px;padding-bottom:26px}
+  .about .wrap{gap:28px}
+  .card{padding:22px}
+  .contact .box{padding:26px 22px;border-radius:22px}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+  .mbar a{flex:1;text-align:center;padding:13px 10px;border-radius:999px;font-weight:700;text-decoration:none}
+  .mbar .wa{background:var(--sun);color:#12303a}
+  .mbar .call{border:2px solid var(--teal);color:var(--ink)}
+}
+@media(max-width:380px){.logo{font-size:.92rem}header .btn{padding:8px 14px!important;font-size:.9rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <header><div class="wrap"><nav>
   <a class="logo" href="#top">Dr. Shridhar Joshi</a>
-  <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#why">Why choose</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li></ul>
+  <ul id="menu"><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#why">Why choose</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li></ul>
   <a class="btn" href="https://wa.me/919786945337?text=Hello%20Dr.%20Shridhar%20Joshi%2C%20I%20would%20like%20to%20book%20a%20consultation%20for%20my%20child.%20Could%20you%20please%20share%20the%20available%20slots%3F" target="_blank" rel="noopener" style="padding:9px 20px">Consult</a>
+  <button class="menu-btn" id="mb" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button>
 </nav></div></header>
 
 <main id="top">
@@ -172,5 +202,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </main>
 
 <footer><div class="wrap"><span>© 2026 Dr. Shridhar Joshi. All rights reserved.</span><span>Child Neurologist</span></div></footer>
+<div class="mbar"><a class="call" href="tel:+919786945337">Call clinic</a><a class="wa" href="https://wa.me/919786945337?text=Hello%20Dr.%20Shridhar%20Joshi%2C%20I%20would%20like%20to%20book%20a%20consultation%20for%20my%20child.%20Could%20you%20please%20share%20the%20available%20slots%3F" target="_blank" rel="noopener">WhatsApp</a></div>
+<script>
+var mb=document.getElementById("mb"),mn=document.getElementById("menu");
+mb.addEventListener("click",function(){var o=mn.classList.toggle("open");mb.setAttribute("aria-expanded",o);mb.textContent=o?"✕":"☰"});
+mn.addEventListener("click",function(e){if(e.target.tagName==="A"){mn.classList.remove("open");mb.textContent="☰";mb.setAttribute("aria-expanded",false)}});
+</script>
 </body>
 </html>
